@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>設定 | dアニメストアにツイートボタンを追加</title>
+</head>
+
+<body>
+  <div class="content">
+    <section class="settings">
+      <h1>設定</h1>
+      <hr>
+      <label for="tweetcontent" style="font-weight: bold; font-size: large;">
+        ツイート内容<br>
+        <textarea name="tweetcontent" id="tweetcontent" cols="60" rows="3" maxlength="110"
+          placeholder="%title% %episodeNumber%を視聴しました！ #dアニメストア"></textarea>
+      </label>
+      <p>ボタンを押したときのツイート内容を変更します。以下のプレースホルダが利用可能です。</p>
+      <ul id="tweetcontent-list-placeholder">
+        <li>タイトル: <code>%title%</code></li>
+        <li>各話番号: <code>%episodeNumber%</code></li>
+        <li>各話タイトル: <code>%episodeTitle%</code></li>
+      </ul>
+      <hr>
+      <div class="buttonWrap">
+        <button id="applyButton">変更</button>
+        <button id="resetButton">リセット</button>
+      </div>
+    </section>
+    <div id="notification">
+    </div>
+  </div>
+
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    code {
+      font-size: 1.1em;
+      padding: .3em .5em;
+      background: #eee;
+    }
+
+    ul li {
+      margin: .4em 0;
+    }
+
+    .content {
+      margin: 0 calc(50vw - min(50vw, 400px));
+    }
+
+    button {
+      cursor: pointer;
+      outline: none;
+      padding: .5em 2em;
+      font-family: sans-serif;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 3px 1px #eee;
+    }
+
+    .buttonWrap {
+      flex-direction: row;
+    }
+
+    .buttonWrap button {
+      flex-basis: 30%;
+      margin: 10px;
+      font-weight: bold;
+    }
+
+    #applyButton {
+      background: #aea;
+    }
+
+    #resetButton {
+      background: #eee;
+    }
+
+    #notification {
+      position: absolute;
+      top: 1em;
+      right: 1em;
+      background: #aeac;
+      opacity: .9;
+      padding: 1em 3em;
+      border: 1px solid #cccc;
+      display: none;
+    }
+  </style>
+  <script src="./options.js"></script>
+</body>
+
+</html>

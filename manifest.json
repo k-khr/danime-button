@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "dアニメストアにツイートボタンを追加",
+  "description": "PC版dアニメストアに、モバイル版dアニメストアと同機能のツイートボタンを追加します。",
+  "version": "0.0.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://anime.dmkt-sp.jp/animestore/ci_pc*"
+      ],
+      "js": [
+        "addButton.js"
+      ]
+    }
+  ],
+  "options_page":  "options.html",
+  "permissions": ["storage"]
+}
