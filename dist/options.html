@@ -9,19 +9,22 @@
 <body>
   <div class="content">
     <section class="settings">
-      <h1>設定</h1>
-      <hr>
-      <label for="tweetcontent" style="font-weight: bold; font-size: large;">
+      <label for="tweetContent" style="font-weight: bold; font-size: large;">
         ツイート内容<br>
-        <textarea name="tweetcontent" id="tweetcontent" cols="60" rows="3" maxlength="110"
-          placeholder="%title% %episodeNumber%を視聴しました！ #dアニメストア"></textarea>
+        <textarea name="tweetContent" id="tweetContent" cols="50" rows="2" maxlength="110"></textarea>
       </label>
       <p>ボタンを押したときのツイート内容を変更します。以下のプレースホルダが利用可能です。</p>
-      <ul id="tweetcontent-list-placeholder">
+      <ul id="tweetContent-list-placeholder">
         <li>タイトル: <code>%title%</code></li>
         <li>各話番号: <code>%episodeNumber%</code></li>
         <li>各話タイトル: <code>%episodeTitle%</code></li>
       </ul>
+      <hr>
+      <label for="preferShareAPI">
+        <input type="checkbox" name="preferShareAPI" id="preferShareAPI" disabled>
+        Web Share APIを使う (experimental)
+      </label>
+      <p><a href="https://web.dev/web-share/">Web Share API</a> を利用し、他のアプリで共有を行います。<a href="https://caniuse.com/web-share">利用可能な環境</a></p>
       <hr>
       <div class="buttonWrap">
         <button id="applyButton">変更</button>
@@ -53,8 +56,7 @@
 
     button {
       cursor: pointer;
-      outline: none;
-      padding: .5em 2em;
+      padding: .2em .5em;
       font-family: sans-serif;
       border: 1px solid #ccc;
       box-shadow: 0 2px 3px 1px #eee;
@@ -66,7 +68,7 @@
 
     .buttonWrap button {
       flex-basis: 30%;
-      margin: 10px;
+      margin: 0 1em;
       font-weight: bold;
     }
 
@@ -79,12 +81,10 @@
     }
 
     #notification {
-      position: absolute;
-      top: 1em;
-      right: 1em;
-      background: #aeac;
-      opacity: .9;
-      padding: 1em 3em;
+      position: fixed;
+      bottom: 0;
+      background: #aea;
+      padding: .2em 1em;
       border: 1px solid #cccc;
       display: none;
     }
