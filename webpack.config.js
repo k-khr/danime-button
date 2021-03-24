@@ -1,5 +1,5 @@
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   devtool: false,
   entry: {
     options: './src/options.ts',

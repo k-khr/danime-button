@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "dアニメストア ツイートボタン",
   "description": "PC版dアニメストアに、モバイル版dアニメストアと同機能のツイートボタンを追加します。",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "options_ui": {
     "page": "options.html",
     "open_in_tab": false

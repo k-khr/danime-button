@@ -5,7 +5,7 @@ import {
 } from './tweetContent';
 
 const tweet = () => {
-  chrome.storage.local.get({preferShareAPI: false}, async ({ preferShareAPI }) => {
+  chrome.storage.local.get({ preferShareAPI: false }, async ({ preferShareAPI }) => {
     if (preferShareAPI) {
       const text = await getTweetText();
       const url = getTweetUrl();
@@ -48,41 +48,37 @@ const buttonIconStyle = {
   margin: 'auto',
 };
 
-const confirmElement = () => new Promise((resolve, _rej) => {
-  const intervalID = setInterval(() => {
-    const playermodal = document.querySelector('modal');
-    if (playermodal) {
-      clearInterval(intervalID);
-      resolve(playermodal);
+const isTargetModal = ((record: MutationRecord) => {
+  let flag = false;
+  record.addedNodes.forEach(node => {
+    if (node.nodeName === 'MODAL' && node instanceof Element && !node.id.endsWith('LOADER') && node.className.includes('modalDialog')) {
+      flag = true;
     }
-  }, 1000);
+  });
+  return flag;
 });
 
 (() => {
   /**
-   * 各話モーダル表示時、すなわち ?partId 付きのURL移動時
-   * popstate でも onclick でもイベント発生しないため setInterval で URL を監視
+   * 各話モーダル表示時にボタンを追加
    */
-  let lastURL = null;
-  setInterval(async () => {
-    if (lastURL == document.URL) return;
-    lastURL = document.URL;
-    if (!document.location.search.includes('partId')) {
-      const button = document.getElementById(BUTTON_ID);
-      if (button) button.remove();
-    } else {
+  const observer = new MutationObserver((mutRecords) => {
+    const isModalDisplayed = mutRecords.some(isTargetModal);
+    const oldButton = document.getElementById(BUTTON_ID);
+    if (isModalDisplayed) {
+      if (oldButton) return;
       const button = document.createElement('a');
       const buttonIcon = document.createElement('i');
       button.id = BUTTON_ID;
       Object.assign(button.style, buttonStyle);
       Object.assign(buttonIcon.style, buttonIconStyle);
-      const playermodal = await confirmElement();
-      // button.href = await getTweetIntentURL();
-      // button.target = '_blank';
-      button.href = '#';
+      button.href = 'javascript:void()';
       button.onclick = tweet;
       button.appendChild(buttonIcon);
       document.querySelector('body').append(button);
+    } else {
+      if (oldButton && !document.location.search.includes('partId')) oldButton.remove();
     }
-  }, 300);
+  });
+  observer.observe(document.querySelector('body'), { childList: true });
 })();
