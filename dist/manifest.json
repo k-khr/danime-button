@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "dアニメストア ツイートボタン",
   "description": "PC版dアニメストアに、モバイル版dアニメストアと同機能のツイートボタンを追加します。",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "options_ui": {
     "page": "options.html",
     "open_in_tab": false
@@ -12,7 +12,7 @@
     "declarativeContent"
   ],
   "host_permissions":[
-    "https://anime.dmkt-sp.jp/animestore/ci_pc*"
+    "https://animestore.docomo.ne.jp/animestore/ci_pc*"
   ],
   "action": {
     "default_title": "dアニメの話数をツイート"
@@ -22,6 +22,6 @@
   },
   "content_scripts": [{
     "js": ["contentScript.js"],
-    "matches": ["https://anime.dmkt-sp.jp/animestore/ci_pc*"]
+    "matches": ["https://animestore.docomo.ne.jp/animestore/ci_pc*"]
   }]
 }

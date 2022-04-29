@@ -11,7 +11,7 @@ chrome.declarativeContent.onPageChanged.removeRules(undefined, async ()=>{
       new chrome.declarativeContent.PageStateMatcher({
         pageUrl: {
           schemes: ['https'],
-          hostEquals: 'anime.dmkt-sp.jp',
+          hostEquals: 'animestore.docomo.ne.jp',
           pathPrefix: '/animestore/ci_pc',
           queryContains: 'partId',
         },
